@@ -220,7 +220,7 @@ auth0/
 
 ```bash
 # 1. Clone the repository
-git clone <repository-url>
+git clone https://github.com/Dhairya0707/solid-auth-system
 cd auth0
 
 # 2. Install dependencies
