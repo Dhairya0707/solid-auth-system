@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth0 | Secure System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            black: '#0F172A',
+                            primary: '#2563EB',
+                            surface: '#F8FAFC',
+                            muted: '#64748B',
+                            border: '#E2E8F0'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brand-surface text-brand-black h-screen flex overflow-hidden font-sans selection:bg-brand-primary selection:text-white">
+    
+    <!-- Left: Solid Branding Section -->
+    <div class="hidden lg:flex lg:w-1/2 relative bg-brand-black flex-col justify-between p-20">
+        <!-- Structural decoration -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
+             <div class="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-br from-brand-primary/40 to-transparent"></div>
+             <div class="absolute bottom-0 right-0 w-96 h-96 border-[1px] border-white/10 rounded-full translate-x-1/2 translate-y-1/2"></div>
+        </div>
+        
+        <div class="z-10">
+            <h2 class="font-extrabold text-3xl text-white tracking-tight flex items-center gap-2">
+                <div class="w-8 h-8 bg-brand-primary rounded-sm"></div>
+                Auth0
+            </h2>
+        </div>
+        
+        <div class="z-10 max-w-lg">
+            <h1 class="text-white text-7xl font-extrabold leading-[1.05] tracking-tighter mb-10">Secure by design. Solid by nature.</h1>
+            <p class="text-brand-muted text-xl font-medium leading-relaxed max-w-md">Experience a unified authentication layer that prioritizes speed and structural integrity.</p>
+        </div>
+        
+        <div class="z-10">
+            <div class="flex gap-10 text-xs font-bold uppercase tracking-widest text-brand-muted">
+                <span>Enterprise Ready</span>
+                <span>JWT Encryption</span>
+                <span>Secure Cookies</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right: Interactive Section -->
+    <div class="w-full lg:w-1/2 flex items-center justify-center p-8 sm:p-24 overflow-y-auto bg-white">
+        <div class="w-full max-w-md">
+            
+            <!-- Auth View -->
+            <div id="auth-view" class="transition-all duration-500 transform translate-y-0 opacity-100">
+                <div class="mb-16">
+                    <h2 id="form-title" class="text-5xl font-extrabold tracking-tighter mb-4 text-brand-black">Welcome</h2>
+                    <p id="form-subtitle" class="text-brand-muted text-lg font-medium">Continue to your Auth0 workspace.</p>
+                </div>
+                
+                <div id="status-msg" class="hidden p-5 mb-10 text-sm font-semibold rounded-lg border-2"></div>
+
+                <form id="auth-form" class="space-y-10">
+                    <div id="name-group" class="hidden space-y-3">
+                        <label for="name" class="block text-xs uppercase tracking-widest text-brand-black font-bold">Full Name</label>
+                        <input type="text" id="name" placeholder="John Doe" class="w-full bg-brand-surface border-2 border-brand-border rounded-xl py-4 px-5 focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10 transition-all font-medium text-lg placeholder:text-brand-muted/40">
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <label for="email" class="block text-xs uppercase tracking-widest text-brand-black font-bold">Email Address</label>
+                        <input type="email" id="email" placeholder="name@company.com" required class="w-full bg-brand-surface border-2 border-brand-border rounded-xl py-4 px-5 focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10 transition-all font-medium text-lg placeholder:text-brand-muted/40">
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <label for="password" class="block text-xs uppercase tracking-widest text-brand-black font-bold">Password</label>
+                        <input type="password" id="password" placeholder="••••••••" required class="w-full bg-brand-surface border-2 border-brand-border rounded-xl py-4 px-5 focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10 transition-all font-medium text-lg placeholder:text-brand-muted/40">
+                    </div>
+                    
+                    <button type="submit" id="submit-btn" class="w-full bg-brand-black text-white py-5 rounded-xl text-sm font-bold tracking-widest uppercase hover:bg-brand-primary hover:shadow-2xl hover:shadow-brand-primary/20 hover:-translate-y-1 active:translate-y-0 transition-all duration-300 mt-12">Sign In</button>
+                </form>
+
+                <div class="mt-20 pt-10 border-t border-brand-border text-center">
+                    <p id="toggle-text" class="text-base font-medium text-brand-muted">
+                        New to Auth0? <span id="toggle-form" class="text-brand-primary cursor-pointer hover:text-brand-black font-bold transition-colors ml-2 underline underline-offset-8 decoration-2 decoration-brand-primary/30 hover:decoration-brand-black">Create Account</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Dashboard View -->
+            <div id="dashboard-view" class="hidden transition-all duration-500 transform translate-y-4 opacity-0">
+                <div class="mb-16">
+                    <div class="w-16 h-16 bg-brand-primary rounded-2xl mb-8 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h2 class="text-5xl font-extrabold tracking-tighter mb-4 text-brand-black">Workspace</h2>
+                    <p class="text-brand-muted text-lg font-medium">Identity successfully verified.</p>
+                </div>
+                
+                <div class="space-y-6 mb-16">
+                    <div class="bg-brand-surface p-8 rounded-2xl border-2 border-brand-border group hover:border-brand-primary transition-colors">
+                        <p class="text-[10px] uppercase tracking-widest text-brand-muted mb-2 font-bold">Authorized User</p>
+                        <p id="user-name" class="text-3xl font-bold text-brand-black">Loading...</p>
+                    </div>
+                    <div class="bg-brand-surface p-8 rounded-2xl border-2 border-brand-border group hover:border-brand-primary transition-colors">
+                        <p class="text-[10px] uppercase tracking-widest text-brand-muted mb-2 font-bold">Verified Email</p>
+                        <p id="user-email" class="text-xl font-bold text-brand-black">Loading...</p>
+                    </div>
+                </div>
+
+                <button id="logout-btn" class="w-full border-2 border-brand-black text-brand-black py-5 rounded-xl text-sm font-bold tracking-widest uppercase hover:bg-brand-black hover:text-white transition-all duration-300">Sever Connection</button>
+            </div>
+            
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
